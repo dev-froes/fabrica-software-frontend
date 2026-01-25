@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { lancamentosApi } from "../services/lancamentos";
 import { projetosApi } from "../services/projetos";
-import "./Projetos.css";
+import "./Lancamentos.css";
 
 export default function Lancamentos() {
     const [lancamentos, setLancamentos] = useState([]);
@@ -99,7 +99,7 @@ export default function Lancamentos() {
         <div className="pageWrap">
             <div className="card">
                 <h1 className="title">Lançamentos (Timesheet)</h1>
-
+                
                 <div className="searchRow">
                     <select
                         className="searchInput"
@@ -114,8 +114,7 @@ export default function Lancamentos() {
                                 (ID: {p.id}) {p.nome}
                             </option>
                         ))}
-                    </select>
-
+                    </select>    
                     <input 
                     className="searchInput"
                     type="date"
@@ -166,7 +165,7 @@ export default function Lancamentos() {
                                 <td className="td">{l.projeto_id}</td>
                                 <td className="td">{l.colaborador}</td>
                                 <td className="td">{l.data}</td>
-                                <td className="td">{l.horas}</td>
+                                <td className="td">{l.horas}h</td>
                                 <td className="td">{l.tipo}</td>
                                 <td className="td">{l.descricao ?? "-"}</td>
                             </tr>

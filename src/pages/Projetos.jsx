@@ -128,7 +128,12 @@ export default function Projetos() {
                                 <td className='td'>{p.nome}</td>
                                 <td className='td'>{p.cliente_id}</td>
                                 <td className='td'>{p.status}</td>
-                                <td className='td'>{p.valor_contrato}</td>
+                                <td className='td'>
+                                    {new Intl.NumberFormat("pt-BR", {
+                                        style: "currency",
+                                        currency: "BRL",
+                                    }).format(p.valor_contrato)}
+                                </td>
                                 <td className='td' style={{ textAlign: "right"}}>
                                     <button className='btn btnDanger' onClick={() => excluirProjeto(p.id)}>
                                         Excluir
