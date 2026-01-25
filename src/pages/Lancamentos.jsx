@@ -89,6 +89,20 @@ export default function Lancamentos() {
         } finally {
             setSalvando(false);
         }
+        
+    }
+    async function excluirLancamento(id) {
+        const ok = confirm("Tem certeza que deseja excluir este lançamento?");
+        if (!ok) return;
+
+        try {
+            await lancamentosApi.excluir(id);
+            await carregarLancamentos();
+        } catch (err) {
+            setErro("Erro ao excluir lançamento.");
+            console.error(err);
+        }
+        
     }
     useEffect(() => {
         carregarProjetos();
@@ -99,7 +113,7 @@ export default function Lancamentos() {
         <div className="pageWrap">
             <div className="card">
                 <h1 className="title">Lançamentos (Timesheet)</h1>
-                
+
                 <div className="searchRow">
                     <select
                         className="searchInput"
@@ -156,6 +170,7 @@ export default function Lancamentos() {
                             <th className="th">Horas</th>
                             <th className="th">Tipo</th>
                             <th className="th">Descrição</th>
+                            <th className="th"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -168,12 +183,17 @@ export default function Lancamentos() {
                                 <td className="td">{l.horas}h</td>
                                 <td className="td">{l.tipo}</td>
                                 <td className="td">{l.descricao ?? "-"}</td>
+                                <td className="td" style={{ textAlign: "right"}}>
+                                    <button className="btn btnDanger" onClick={() => excluirLancamento(l.id)}>
+                                        Excluir
+                                    </button>
+                                </td>
                             </tr>
                         ))}
 
                         {lancamentos.length === 0 && !carregando && (
                             <tr className="tr">
-                                <td className="td" colSpan="7">
+                                <td className="td" colSpan="8">
                                     Nenhum lançamento encontrado.
                                 </td>
                             </tr>
