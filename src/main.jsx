@@ -6,7 +6,7 @@ import App from './App.jsx'
 
 ReactDom.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/fabrica-software-frontend">
       <App />
     </BrowserRouter>
   </React.StrictMode>,
