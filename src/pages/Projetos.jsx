@@ -16,7 +16,7 @@ export default function Projetos() {
         data_inicio: "",
         data_fim: "",
         valor_contrato: "",
-        status: "planejamento",
+        status: "planejado",
     });
     const [salvando, setSalvando] = useState(false);
 
@@ -62,6 +62,10 @@ export default function Projetos() {
         e.preventDefault();
         setErro("");
         setSalvando(true);
+        console.log("Payload projeto:", {
+            ...Projetos,
+            status: form.status,
+        }) 
 
         try {
             await projetosApi.criar({
