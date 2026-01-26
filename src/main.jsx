@@ -1,13 +1,13 @@
 import React from 'react'
 import ReactDom from 'react-dom/client'
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import './index.css'
 import App from './App.jsx'
 
 ReactDom.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter basename="/fabrica-software-frontend">
+    <HashRouter basename="/fabrica-software-frontend">
       <App />
-    </BrowserRouter>
+    </HashRouter>
   </React.StrictMode>,
 )
