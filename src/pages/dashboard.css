@@ -66,3 +66,35 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.twoColGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.panel {
+  background: #1f1f1f;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 14px;
+  padding: 14px;
+}
+
+.panel canvas {
+    max-height: 260px;
+}
+
+.panelTitle {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  font-weight: 750;
+  color: #f2f2f2;
+}
+
+/* Responsivo: em telas menores vira 1 coluna */
+@media (max-width: 900px) {
+  .twoColGrid {
+    grid-template-columns: 1fr;
+  }
+}

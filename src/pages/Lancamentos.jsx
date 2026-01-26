@@ -104,6 +104,12 @@ export default function Lancamentos() {
         }
         
     }
+
+    const projetosPorId = projetos.reduce((acc, p) => {
+        acc[p.id] = p.nome;
+        return acc;
+    }, {});
+
     useEffect(() => {
         carregarProjetos();
         carregarLancamentos();
@@ -177,7 +183,7 @@ export default function Lancamentos() {
                         {lancamentos.map((l) => (
                             <tr key={l.id} className="tr">
                                 <td className="td">{l.id}</td>
-                                <td className="td">{l.projeto_id}</td>
+                                <td className="td">{projetosPorId[l.projeto_id]}</td>
                                 <td className="td">{l.colaborador}</td>
                                 <td className="td">{l.data}</td>
                                 <td className="td">{l.horas}h</td>
