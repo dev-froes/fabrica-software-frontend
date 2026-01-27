@@ -1,13 +1,14 @@
 import {  Outlet } from "react-router-dom";
-import Menu from "./Menu";
+import Sidebar from "./Sidebar";
+import "./Layout.css";
 
 export default function Layout() {
     return (
-        
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 16px" }}>
-            <Menu />
-            <Outlet />
+        <div className="layout">
+            <Sidebar/>
+            <main className="mainContent">                
+                <Outlet />
+            </main>
         </div>
-        
-    )
+    );
 }

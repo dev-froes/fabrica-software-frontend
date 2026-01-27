@@ -1,0 +1,73 @@
+.sidebar {
+  width: 240px;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  background: #121212;
+  border-right: 1px solid rgba(255,255,255,0.08);
+  padding: 24px 16px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  color: #fff;
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 32px;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  color: #ccc;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.navItem:hover {
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+}
+
+.navItem.active {
+  background: rgba(79,140,255,0.35);
+  color: #fff;
+}
+
+.navIcon {
+    font-size: 18px;
+}
+
+.sidebarFooter {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    color: rgba(209, 209, 209, 0.541);
+    font-size: 13px;
+}
+
+.statusDot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #27c93f;
+    box-shadow: 0 0 10px rgba(39,201,63,0.6);
+}
+
+.footerText {
+    font-weight: 600;
+}

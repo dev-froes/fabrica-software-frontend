@@ -14,7 +14,7 @@ export default function Clientes() {
     ativo: true, 
   });
   const [salvando, setSalvando] = useState(false);
-
+  const [editandoId, setEditandoId] = useState(null);
   async function carregar() {
     setErro("");
     setCarregando(true);
@@ -41,6 +41,19 @@ export default function Clientes() {
             console.error(err);
         }
     }
+    function iniciarEdicao(cliente) {
+      setEditandoId(cliente.id);
+      setForm({
+        nome: cliente.nome,
+        email: cliente.email,
+        telefone: cliente.telefone || "",
+        ativo: !!cliente.ativo,
+      });
+    }
+    function cancelarEdicao() {
+      setEditandoId(null);
+      setForm({ nome: "", email: "", telefone: "", ativo: true });
+    }
 
     async function criarCliente(e) {
         e.preventDefault();
@@ -48,19 +61,25 @@ export default function Clientes() {
         setSalvando(true);
 
         try {
-            await clientesApi.criar({
+            const payload = {
                 nome: form.nome,
                 email: form.email,
                 telefone: form.telefone|| null,
-                ativo: form.ativo,
-            });
+                ativo: !!form.ativo,
+            };
 
-            setForm({ nome: "", email: "", telefone: "", ativo: true});
+            if (editandoId) {
+              await clientesApi.atualizar(editandoId, payload);
+            } else {
+              await clientesApi.criar(payload);
+            }
+
+            cancelarEdicao();
             await carregar();
         } catch (err) {
             const msg =
                 err?.response?.data?.message ||
-                "Erro ao criar cliente. (verifique os dados e tente novamente)";
+                "Erro ao salvar cliente. (verifique os dados e tente novamente)";
             setErro(msg);
             console.error(err);
         } finally {
@@ -111,6 +130,7 @@ export default function Clientes() {
               <th className="th">Telefone</th>
               <th className="th">Ativo</th>
               <th className="th"></th>
+              <th className="th"></th>
             </tr>
           </thead>
 
@@ -123,16 +143,21 @@ export default function Clientes() {
                 <td className="td">{c.telefone ?? "-"}</td>
                 <td className="td">{c.ativo ? "Sim" : "Não"}</td>
                 <td className="td" style={{ textAlign: "right"}}>
-                    <button className="btn btnDanger" onClick={() => excluir(c.id)}>
-                        Excluir
-                    </button>
+                  <button className="btn" onClick={() => iniciarEdicao(c)}>
+                    Editar
+                  </button>
+                </td>
+                <td className="td" style={{ textAlign: "right"}}>        
+                  <button className="btn btnDanger" onClick={() => excluir(c.id)}>
+                    Excluir
+                  </button>
                 </td>
               </tr>
             ))}
 
             {clientes.length === 0 && (
               <tr className="tr">
-                <td className="td" colSpan="6">
+                <td className="td" colSpan="7">
                   Nenhum cliente encontrado.
                 </td>
               </tr>
@@ -140,7 +165,9 @@ export default function Clientes() {
           </tbody>
         </table>
         <div className="formCard">
-            <h2 className="formTitle">Criar Novo Cliente</h2>
+            <h2 className="formTitle">
+              {editandoId ? `Editar Cliente (ID: ${editandoId})` : "Criar Novo Cliente"}
+            </h2>
 
             <form onSubmit={criarCliente}>
                 <div className="formGrid">
@@ -185,13 +212,13 @@ export default function Clientes() {
                     <button
                         type="button"
                         className="btn"
-                        onClick={() => setForm({ nome: "", email: "", telefone: "", ativo: true})}
+                        onClick={cancelarEdicao}
                     >
                         Cancelar
                     </button>
 
                     <button type="submit" className="btn btnPrimary" disabled={salvando}>
-                        {salvando ? "Criando..." : "Criar"}
+                        {salvando ? "Salvando..." : editandoId ? "Atualizar" : "Criar"}
                     </button>
                 </div>
             </form>

@@ -4,7 +4,7 @@ import Layout from "./components/Layout";
 import Clientes from "./pages/Clientes";
 import Projetos from "./pages/Projetos";
 import Lancamentos from "./pages/Lancamentos";
-import Dashboard from "./pages/dashboard";
+import Dashboard from "./pages/Dashboard";
 
 export default function App() {
     return (
