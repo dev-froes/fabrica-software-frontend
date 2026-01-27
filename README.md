@@ -1,16 +1,135 @@
-# React + Vite
+# Mini Controle de Fábrica de Software – Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Frontend desenvolvido em **React (Vite)** para consumir a API REST do backend (Laravel) e disponibilizar as telas:
 
-Currently, two official plugins are available:
+- Clientes (CRUD)
+- Projetos (CRUD)
+- Lançamentos (CRUD + filtros)
+- Dashboard (métricas + resumo por tipo + gráfico)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## Links (Produção)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Frontend (GitHub Pages):** https://dev-froes.github.io/fabrica-software-frontend/
+- **Backend (Railway):** https://fabrica-software-backend-production.up.railway.app/api/clientes
 
-## Expanding the ESLint configuration
+> Observação: o frontend consome o backend via variável de ambiente `VITE_API_URL`.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## Tecnologias
+
+- React + Vite
+- React Router (HashRouter, compatível com GitHub Pages)
+- Axios
+- Chart.js + react-chartjs-2
+- CSS por página (organização por responsabilidade)
+
+---
+
+## Estrutura do Projeto
+
+- `src/pages/` → telas (Clientes, Projetos, Lançamentos, Dashboard)
+- `src/services/` → camada de comunicação com a API (Axios)
+- `src/components/` → componentes reutilizáveis (Sidebar, Layout, etc.)
+- `src/index.css` → estilos globais
+
+---
+
+## Como rodar localmente
+
+### 1️ Clonar o repositório
+
+```bash
+git clone https://github.com/dev-froes/fabrica-software-frontend.git
+cd fabrica-software-frontend
+---
+### 2 Instalar dependências
+
+```bash
+npm install
+---
+### 3 Configurar variável de ambiente
+Crie um arquivo .env na raiz do projeto
+VITE_API_URL=https://fabrica-software-backend-production.up.railway.app/api
+
+### 4 Subir o projeto
+```bash
+npm run dev
+
+Acesse:http://localhost:5173
+
+### Deploy no GitHub Pages
+
+Este projeto utiliza gh-pages para publicar o build do Vite no GitHub Pages.
+
+1️ Configurar vite.config.js
+
+O base deve ser o nome do repositório:
+
+base: "/fabrica-software-frontend/"
+
+2️ Deploy
+npm run deploy
+
+ Rotas (Navegação)
+
+Por ser hospedado em ambiente estático (GitHub Pages), o projeto utiliza HashRouter para evitar erro 404 no refresh.
+
+Exemplos:
+
+./#/clientes
+
+./#/projetos
+
+./#/lancamentos
+
+./#/dashboard
+
+### Funcionalidades por tela
+##Clientes
+
+.Listar
+
+.Buscar por nome/e-mail
+
+.Criar
+
+.Editar
+
+.Excluir
+
+##Projetos
+
+.Listar
+
+.Criar (com select de cliente)
+
+.Excluir
+
+.(Opcional: editar, se implementado)
+
+##Lançamentos
+
+.Listar
+
+.Filtrar por projeto e período
+
+.Criar (com select de projeto)
+
+.Excluir
+
+##Dashboard
+
+.Selecionar projeto + período
+
+.Cards de métricas
+
+.Resumo por tipo
+
+.Gráfico de horas por tipo
+
+## Autor
+
+Projeto desenvolvido por Daniel Fróes Cavalcante para desafio técnico.
