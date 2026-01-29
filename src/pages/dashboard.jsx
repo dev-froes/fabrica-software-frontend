@@ -163,7 +163,7 @@ export default function Dashboard() {
                             </div>
 
                             <div className="kpiCard">
-                                <div className="kpiLabel">Margem bruta (%)</div>
+                                <div className="kpiLabel">Margem percentual bruta(%)</div>
                                 <div className="kpiValue">
                                     {Number(resultado.metricas.margem_bruta_percentual || 0).toFixed(2)}%
                                 </div>
