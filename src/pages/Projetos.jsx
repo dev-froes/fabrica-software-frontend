@@ -238,7 +238,7 @@ export default function Projetos() {
 
                         <div className='actionsRow'>
                             <button
-                                type='buttom'
+                                type='button'
                                 className='btn'
                                 onClick={() =>
                                     setForm({

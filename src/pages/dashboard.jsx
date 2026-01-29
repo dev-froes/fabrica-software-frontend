@@ -198,7 +198,7 @@ export default function Dashboard() {
                                             </tr>
                                         ))}
 
-                                        {Object.keys(resultado.resumo_por_tipo || {}). length === 0 && (
+                                        {Object.keys(resultado.resumo_por_tipo || {}).length === 0 && (
                                             <tr className="tr">
                                                 <td className="td" colSpan="3">Sem lançamentos no período</td>
                                             </tr>
